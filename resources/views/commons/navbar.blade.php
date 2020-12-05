@@ -12,17 +12,21 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::check())
-                    <li class="nav-item"></li>
-                    <li class="nav-item">
+                     {{-- ユーザ一覧ページへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('users.index', 'ユーザー一覧', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
+                            {{-- ユーザ詳細ページへのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('users.show','プロフィール',['user'=>Auth::id()]) !!}</li>
                             
-                            <li class="dropdown-item">プロフィール</li>
                             <li class="dropdown-divider"></li>
-                            
+                            {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get','ログアウト') !!}</li>
                             
                         </ul>
                     </li>
+                    
                 @else
                     <li class="nav-item">{!! link_to_route('signup.get','ユーザー登録',[],['class'=>'nav-link']) !!}</li>
                     <li class="nav-item">{!! link_to_route('login','ログイン',[],['class'=>'nav-link']) !!}</li>
@@ -31,4 +35,7 @@
         </div>
     </nav>
 </header>
+                     
+                     
+                        
                         
